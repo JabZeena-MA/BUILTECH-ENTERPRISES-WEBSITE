@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
-
+from urllib.parse import quote as urlquote
 from .forms import ContactForm, QuoteForm
 from .models import Project, Service, Testimonial
 
@@ -45,8 +45,24 @@ def quote(request):
         form = QuoteForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, "Your quote request has been received. Our team will contact you shortly.")
-            return redirect("quote")
+
+            message = "*New Quote Request - Builtech Enterprises*\n\n"
+
+            for field_name, field in form.fields.items():
+                value = form.cleaned_data.get(field_name)
+
+                if value:
+                    message += f"*{field.label}:* {value}\n"
+
+            whatsapp_number = "918921879747"
+
+            whatsapp_url = (
+                f"https://wa.me/{whatsapp_number}"
+                f"?text={urlquote(message)}"
+            )
+
+            return redirect(whatsapp_url)
+
     else:
         form = QuoteForm()
     return render(request, "website/quote.html", {"form": form})
