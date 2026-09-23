@@ -1,0 +1,10 @@
+{% extends "website/base.html" %}
+{% block title %}Projects | BUILTTECH{% endblock %}
+{% block content %}
+<section class="page-hero"><div class="container"><span class="eyebrow">OUR PROJECTS</span><h1>Selected work.</h1><p>Browse completed gypsum and interior projects.</p></div></section>
+<section class="section-padding"><div class="container"><div class="row g-4">
+{% for project in projects %}
+<div class="col-md-6 col-lg-4"><a class="project-card" href="{{ project.get_absolute_url }}">{% if project.image %}<img src="{{ project.image.url }}" alt="{{ project.title }}">{% else %}<div class="project-placeholder"><i class="fa-solid fa-building"></i></div>{% endif %}<div class="project-overlay"><span>{{ project.category }}</span><h3>{{ project.title }}</h3><small>{{ project.location }}</small></div></a></div>
+{% empty %}<div class="col-12"><div class="empty-state">Add project photos and details from the admin panel.</div></div>{% endfor %}
+</div></div></section>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "website/base.html" %}
+{% block title %}Services | BUILTTECH{% endblock %}
+{% block content %}
+<section class="page-hero"><div class="container"><span class="eyebrow">OUR SERVICES</span><h1>Solutions for walls,<br>ceilings and interiors.</h1><p>Choose the service that matches your project requirements.</p></div></section>
+<section class="section-padding"><div class="container"><div class="row g-4">
+{% for service in services %}
+<div class="col-md-6 col-lg-4"><div class="service-card h-100">{% if service.image %}<img src="{{ service.image.url }}" alt="{{ service.title }}">{% else %}<div class="service-icon"><i class="fa-solid {{ service.icon }}"></i></div>{% endif %}<h3>{{ service.title }}</h3><p>{{ service.short_description }}</p><a href="{{ service.get_absolute_url }}">View Service <i class="fa-solid fa-arrow-right"></i></a></div></div>
+{% empty %}<div class="col-12"><div class="empty-state">No services added yet. Log in to /admin/ and add your services.</div></div>{% endfor %}
+</div></div></section>
+{% endblock %}

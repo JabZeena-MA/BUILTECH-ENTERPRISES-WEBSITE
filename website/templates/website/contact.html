@@ -1,0 +1,9 @@
+{% extends "website/base.html" %}
+{% block title %}Contact | BUILTTECH{% endblock %}
+{% block content %}
+<section class="page-hero small"><div class="container"><span class="eyebrow">CONTACT US</span><h1>Let's talk about your project.</h1><p>Send an enquiry and our team will get in touch.</p></div></section>
+<section class="section-padding"><div class="container"><div class="row g-5">
+<div class="col-lg-5"><span class="eyebrow dark">CONTACT DETAILS</span><h2>We're ready to help.</h2><div class="contact-item"><i class="fa-solid fa-phone"></i><div><strong>Phone</strong><a href="tel:{{ company_phone }}">{{ company_phone }}</a></div></div><div class="contact-item"><i class="fa-solid fa-envelope"></i><div><strong>Email</strong><a href="mailto:{{ company_email }}">{{ company_email }}</a></div></div><div class="contact-item"><i class="fa-solid fa-location-dot"></i><div><strong>Location</strong><span>{{ company_address }}</span></div></div></div>
+<div class="col-lg-7"><div class="form-card"><form method="post">{% csrf_token %}{% for field in form %}<div class="mb-3"><label class="form-label">{{ field.label }}</label>{{ field }}{% for error in field.errors %}<div class="text-danger small">{{ error }}</div>{% endfor %}</div>{% endfor %}<button class="btn btn-primary btn-lg" type="submit">Send Message <i class="fa-solid fa-paper-plane ms-2"></i></button></form></div></div>
+</div></div></section>
+{% endblock %}

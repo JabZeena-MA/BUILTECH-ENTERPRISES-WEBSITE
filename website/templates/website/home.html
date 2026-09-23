@@ -1,0 +1,150 @@
+{% extends "website/base.html" %}
+{% load static %}
+{% block title %}BUILTTECH | Gypsum Plastering & Interior Solutions{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="container">
+        <div class="row align-items-center min-vh-75">
+            <div class="col-lg-7">
+                <span class="eyebrow"><i class="fa-solid fa-building me-2"></i> PROFESSIONAL GYPSUM PLASTERING</span>
+                <h1>Build Better.<br><span>Finish Better.</span></h1>
+                <p class="hero-text">Expert gypsum plastering for homes, offices and commercial spaces.</p>
+                <div class="hero-actions">
+                    <a href="{% url 'quote' %}" class="btn btn-primary btn-lg">Request a Free Quote <i class="fa-solid fa-arrow-right ms-2"></i></a>
+                    <a href="tel:{{ company_phone }}" class="btn btn-outline-light btn-lg"><i class="fa-solid fa-phone me-2"></i> Call Us</a>
+                </div>
+                <div class="hero-points">
+                    <span><i class="fa-solid fa-circle-check"></i> Quality Materials</span>
+                    <span><i class="fa-solid fa-circle-check"></i> Skilled Team</span>
+                    <span><i class="fa-solid fa-circle-check"></i> Clean Finish</span>
+                </div>
+            </div>
+            <div class="col-lg-5 d-none d-lg-block">
+                <div class="hero-card">
+                    <img src="{% static 'website/img/logo3.png' %}" alt="BUILTTECH">
+                    <p>From surface preparation to final finish, we deliver professional workmanship with attention to detail.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="stats-strip">
+    <div class="container">
+        <div class="row text-center g-3">
+            <div class="col-6 col-lg-3"><strong>10+</strong><span>Years Experience</span></div>
+            <div class="col-6 col-lg-3"><strong>50+</strong><span>Projects Completed</span></div>
+            <div class="col-6 col-lg-3"><strong>100%</strong><span>Quality Focus</span></div>
+            <div class="col-6 col-lg-3"><strong>24/7</strong><span>Enquiry Support</span></div>
+        </div>
+    </div>
+</section>
+
+<section class="section-padding">
+    <div class="container">
+        <div class="section-heading text-center">
+            <span class="eyebrow dark">WHAT WE DO</span>
+            <h2>Complete Gypsum Plastering</h2>
+            <p>Reliable workmanship for residential, commercial and renovation projects.</p>
+        </div>
+        <div class="row g-4">
+            {% for service in services %}
+            <div class="col-md-6 col-lg-4">
+                <div class="service-card">
+                    {% if service.image %}
+                        <img src="{{ service.image.url }}" alt="{{ service.title }}">
+                    {% else %}
+                        <div class="service-icon"><i class="fa-solid {{ service.icon }}"></i></div>
+                    {% endif %}
+                    <h3>{{ service.title }}</h3>
+                    <p>{{ service.short_description }}</p>
+                    <a href="{{ service.get_absolute_url }}">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12"><div class="empty-state">Add services from the Django admin panel.</div></div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-5"><a href="{% url 'services' %}" class="btn btn-dark">View All Services</a></div>
+    </div>
+</section>
+
+<section class="dark-section section-padding">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6">
+                <span class="eyebrow">WHY BUILTTECH</span>
+                <h2>Workmanship you can see. Quality you can trust.</h2>
+                <p>We combine proper preparation, experienced installation and careful finishing to create interiors that look clean and remain dependable.</p>
+                <div class="check-list">
+                    <div><i class="fa-solid fa-check"></i><span><strong>Detailed planning</strong><br>We understand the space and requirements before work begins.</span></div>
+                    <div><i class="fa-solid fa-check"></i><span><strong>Professional installation</strong><br>Attention to levels, joints, corners and finishing.</span></div>
+                    <div><i class="fa-solid fa-check"></i><span><strong>Transparent communication</strong><br>Clear scope and quotation for your project.</span></div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="process-box">
+                    <div class="process-item"><b>01</b><div><h4>Consultation</h4><p>Discuss your space, style and requirements.</p></div></div>
+                    <div class="process-item"><b>02</b><div><h4>Site Assessment</h4><p>Measure and plan the work accurately.</p></div></div>
+                    <div class="process-item"><b>03</b><div><h4>Installation</h4><p>Execute the approved design and scope.</p></div></div>
+                    <div class="process-item"><b>04</b><div><h4>Finishing</h4><p>Inspect details and complete the final finish.</p></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section-padding">
+    <div class="container">
+        <div class="section-heading">
+            <span class="eyebrow dark">OUR WORK</span>
+            <h2>Featured Projects</h2>
+        </div>
+        <div class="row g-4">
+            {% for project in projects %}
+            <div class="col-md-6 col-lg-4">
+                <a class="project-card" href="{{ project.get_absolute_url }}">
+                    {% if project.image %}<img src="{{ project.image.url }}" alt="{{ project.title }}">{% else %}<div class="project-placeholder"><i class="fa-solid fa-building"></i></div>{% endif %}
+                    <div class="project-overlay"><span>{{ project.category }}</span><h3>{{ project.title }}</h3><small>{{ project.location }}</small></div>
+                </a>
+            </div>
+            {% empty %}
+            <div class="col-12"><div class="empty-state">Add projects from the Django admin panel.</div></div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="cta-section">
+    <div class="container text-center">
+        <span class="eyebrow">START YOUR PROJECT</span>
+        <h2>Let's create a better space together.</h2>
+        <p>Tell us what you need and we'll get back to you with the next steps.</p>
+        <a href="{% url 'quote' %}" class="btn btn-primary btn-lg">Get Your Free Quote</a>
+    </div>
+</section>
+
+{% if testimonials %}
+<section class="section-padding testimonials">
+    <div class="container">
+        <div class="section-heading text-center">
+            <span class="eyebrow dark">CLIENT FEEDBACK</span>
+            <h2>What Our Customers Say</h2>
+        </div>
+        <div class="row g-4">
+            {% for item in testimonials %}
+            <div class="col-md-6 col-lg-4">
+                <div class="testimonial-card">
+                    <div class="stars">{% for x in "12345" %}<i class="fa-solid fa-star"></i>{% endfor %}</div>
+                    <p>“{{ item.message }}”</p>
+                    <strong>{{ item.customer_name }}</strong>
+                    <small>{{ item.location }}</small>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endblock %}

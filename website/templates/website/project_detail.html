@@ -1,0 +1,9 @@
+{% extends "website/base.html" %}
+{% block title %}{{ project.title }} | BUILTTECH{% endblock %}
+{% block content %}
+<section class="page-hero small"><div class="container"><span class="eyebrow">{{ project.category }}</span><h1>{{ project.title }}</h1><p>{{ project.location }}</p></div></section>
+<section class="section-padding"><div class="container"><div class="row g-5">
+<div class="col-lg-8">{% if project.image %}<img class="detail-image" src="{{ project.image.url }}" alt="{{ project.title }}">{% endif %}<div class="content-copy mt-4">{{ project.description|linebreaks }}</div></div>
+<div class="col-lg-4"><div class="quote-box"><h3>Have a similar project?</h3><p>Send us your requirements for a quotation.</p><a href="{% url 'quote' %}" class="btn btn-primary w-100">Get a Quote</a></div></div>
+</div></div></section>
+{% endblock %}
